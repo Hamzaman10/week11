@@ -60,9 +60,8 @@ resource "aws_instance" "web" {
               EOF
 }
 
-resource "aws_security_group" "insecure" {
-  name        = "open-all"
-  description = "Allow all inbound traffic"
+resource "aws_security_group" "bad_sg" {
+  name = "open-all"
 
   ingress {
     from_port   = 0
@@ -70,6 +69,7 @@ resource "aws_security_group" "insecure" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
 
   egress {
     from_port   = 0
