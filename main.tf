@@ -60,21 +60,21 @@ resource "aws_instance" "web" {
               EOF
 }
 
-resource "aws_security_group" "insecure" {
-  name        = "open-all"
-  description = "Allows all inbound traffic from the internet"
+resource "aws_security_group" "open_all" {
+  name        = "open-to-world"
+  description = "Allows ALL traffic from the internet"
 
   ingress {
     from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    to_port     = 65535
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
     from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    to_port     = 65535
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
