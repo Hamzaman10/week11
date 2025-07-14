@@ -60,8 +60,9 @@ resource "aws_instance" "web" {
               EOF
 }
 
-resource "aws_security_group" "bad_sg" {
-  name = "open-all"
+resource "aws_security_group" "insecure" {
+  name        = "open-all"
+  description = "Allows all inbound traffic from the internet"
 
   ingress {
     from_port   = 0
@@ -69,7 +70,6 @@ resource "aws_security_group" "bad_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
 
   egress {
     from_port   = 0
@@ -78,6 +78,7 @@ resource "aws_security_group" "bad_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 
 output "web-address" {
   value = "${aws_instance.web.public_dns}:8080"
