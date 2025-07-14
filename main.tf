@@ -60,24 +60,23 @@ resource "aws_instance" "web" {
               EOF
 }
 
-resource "aws_security_group" "open_all" {
-  name        = "open-to-world"
-  description = "Allows ALL traffic from the internet"
-
+resource "aws_security_group" "bad_example" {
+  name        = "allow_all"
+  description = "Security group with unrestricted ingress"
   ingress {
     from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 
 
 output "web-address" {
